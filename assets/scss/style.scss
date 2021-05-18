@@ -1,0 +1,29 @@
+html,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+label,
+input,
+textarea,
+button,
+select,
+a,
+li {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 14px;
+}
+
+svg,
+img {
+  display: block;
+}
+
+input,
+textarea {
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.24);
+}
