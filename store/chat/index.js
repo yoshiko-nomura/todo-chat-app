@@ -1,41 +1,39 @@
-import axios from 'axios'
-
 export const state = () => ({
-  posts: [],
+  messages: [],
 })
 
 export const getters = {
-  posts: state => {
-    return state.posts
+  messages: (state) => {
+    return state.messages
   },
 }
 
 export const actions = {
-  submit ({ dispatch }, userMessage) {
-    let Ref = this.$fire.database().ref().child('userMessage')
-      Ref.push(userMessage)
-      .then(response => {
-        console.log(response)
-        dispatch('getData')
+  async submitChat(_, payload) {
+    try {
+      await this.$fire.database.ref().push().set({
+        text: payload.text,
+        time: this.$fireModule.database.ServerValue.TIMESTAMP,
+        uid: payload.uid,
       })
+    } catch (error) {
+      console.log(error)//eslint-disable-line
+    }
   },
-  getData ({ commit }) {
-    return axios
-      .get('https://sample-6a560.firebaseio.com/userMessage.json')
-      .then((res) => {
-        console.log(res.data)
-        // const postArray = []
-        // for (const key in res.data) {
-        //   let allKey = res.data[key]
-        //   postArray.push(allKey)
-        // }
-        commit('getData', res.data)
+  async getData({ commit }) {
+    try {
+      await this.$fire.database.ref().on('value', (snapshot) => {
+        const data = snapshot.val()
+        commit('setData', data)
       })
+    } catch (error) {
+      console.log(error)//eslint-disable-line
+    }
   },
 }
 
 export const mutations = {
-  getData (state, postArray) {
-    state.posts = postArray
+  setData(state, data) {
+    state.messages = data
   },
 }

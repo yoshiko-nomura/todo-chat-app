@@ -1,14 +1,26 @@
 <template>
   <div class="page">
-    {{ user }}
+    <NavHeader />
+    <div class="container">
+      <ViewChat :image="image" :name="name" />
+      <ViewTask />
+    </div>
   </div>
 </template>
 
 <script>
 export default {
+  async fetch({ store }) {
+    await store.dispatch('checkLogin')
+    store.dispatch('todo/getData')
+    store.dispatch('chat/getData')
+  },
   computed: {
-    user() {
-      return this.$store.getters.user
+    image() {
+      return this.$store.getters.user.photoURL
+    },
+    name() {
+      return this.$store.getters.user.name
     },
   },
 }

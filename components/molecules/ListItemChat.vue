@@ -1,9 +1,33 @@
 <template>
-  <div class="list-item list-item-chat"></div>
+  <li class="list-item list-item-chat">
+    <IconUser :image="image" />
+    <div class="content">
+      <p class="name">{{ name }}</p>
+      <time class="time">{{
+        $dayjs(messages.time).format('YYYY.MM.DD HH:mm')
+      }}</time>
+      <p class="text">{{ messages.text }}</p>
+    </div>
+  </li>
 </template>
 
 <script>
-export default {}
+export default {
+  props: {
+    image: {
+      type: String,
+      required: false,
+      default: '',
+    },
+    messages: {
+      type: Object,
+    },
+    name: {
+      type: String,
+      default: '',
+    },
+  },
+}
 </script>
 
 <style lang="scss" scoped>

@@ -26,7 +26,7 @@ export default {
   border: none;
   border-radius: 4px;
   appearance: none;
-  background-color: #008eff;
+  background-color: $blue;
   color: #ffffff;
 
   > .label {

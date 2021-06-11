@@ -1,5 +1,11 @@
 <template>
-  <div class="view view-task"></div>
+  <div class="view view-task">
+    <div class="top">
+      <p class="title">タスク</p>
+    </div>
+    <ListTask />
+    <FormTask />
+  </div>
 </template>
 
 <script>

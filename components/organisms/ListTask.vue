@@ -1,23 +1,27 @@
 <template>
-  <div class="list list-task"></div>
+  <ul class="list list-task">
+    <li
+      is="ListItemTask"
+      v-for="todo in todos"
+      :key="todo.id"
+      :todos="todo"
+    ></li>
+  </ul>
 </template>
 
 <script>
-// 動的コンポーネントはimportが必要
-// import ListItemTask from '~/components/molecules/ListItemTask.vue'
-
 export default {
-  // components: {
-  //   // ListItemTask,
-  // },
-  // async fetch({ store }) {
-  //   await store.dispatch('sample/getTodos')
-  // },
-  // computed: {
-  //   todos() {
-  //     return this.$store.getters['sample/todos']
-  //   },
-  // },
+  computed: {
+    user() {
+      return this.$store.getters.user
+    },
+    todos() {
+      // return this.$store.getters['todo/todos'].filter((e) => {
+      //   return e.uid === this.user.uid
+      // }) //eslint-disable-line
+      return this.$store.getters['todo/todos']
+    },
+  },
 }
 </script>
 

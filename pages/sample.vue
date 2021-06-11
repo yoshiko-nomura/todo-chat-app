@@ -3,11 +3,11 @@
     <form @submit.prevent>
       <label>
         <span> email </span>
-        <input type="text" v-model="email" />
+        <input v-model="email" type="text" />
       </label>
       <label>
         <span> password </span>
-        <input type="password" v-model="password" />
+        <input v-model="password" type="password" />
       </label>
       <button type="submit" @click="createAccount">createAccount</button>
     </form>
@@ -28,10 +28,10 @@ export default {
         await this.$fire.auth
           .createUserWithEmailAndPassword(this.email, this.password)
           .then(() => {
-            console.log('done!')
+            console.log('done!') //eslint-disable-line
           })
       } catch (e) {
-        console.log(e)
+        console.log(e) //eslint-disable-line
       }
     },
   },

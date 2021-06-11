@@ -45,7 +45,7 @@ export default {
     align-items: center;
 
     > .link {
-      color: #008eff;
+      color: $blue;
     }
   }
 }

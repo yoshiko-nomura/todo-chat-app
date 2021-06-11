@@ -4,8 +4,8 @@
     <div class="content">
       <div class="sns">
         <IconBrand item-status="google" @click="loginGoogle" />
-        <IconBrand item-status="twitter" />
-        <IconBrand item-status="facebook" />
+        <IconBrand item-status="twitter" @click="loginTwitter" />
+        <IconBrand item-status="facebook" @click="loginFacebook" />
       </div>
       <div class="form">
         <FormItemInput v-model="name" placeholder="ユーザー名" type="text" />
@@ -81,6 +81,12 @@ export default {
     loginGoogle() {
       this.$store.dispatch('loginGoogle')
     },
+    loginTwitter() {
+      this.$store.dispatch('loginTwitter')
+    },
+    loginFacebook() {
+      this.$store.dispatch('loginFacebook')
+    },
   },
 }
 </script>
@@ -104,7 +110,7 @@ export default {
       margin-right: 40px;
 
       > .icon {
-        border: 1px solid #008eff;
+        border: 1px solid $blue;
         width: 64px;
         height: 64px;
         border-radius: 50%;
@@ -153,7 +159,7 @@ export default {
     align-items: center;
 
     > .link {
-      color: #008eff;
+      color: $blue;
     }
   }
 }

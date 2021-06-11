@@ -1,43 +1,85 @@
 <template>
-  <label class="form-item form-item-input-check"> </label>
+  <label class="form-item form-item-input-check">
+    <input
+      :checked="checked"
+      type="checkbox"
+      class="input"
+      @input="$emit('switch', $event.target.checked)"
+    />
+    <span class="mark"></span>
+  </label>
 </template>
 
 <script>
-export default {}
+export default {
+  props: {
+    checked: {
+      type: Boolean,
+      default: false,
+    },
+  },
+}
 </script>
 
 <style lang="scss" scoped>
 .form-item-input-check {
-  position: relative;
+  padding-right: 6px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 
-  &::before {
+  &:hover > .mark {
+    background: #dddddd !important;
+    border: solid 2px $blue;
+    border-radius: 50%;
+  }
+
+  .input {
+    margin: 0;
+    width: 0;
+    opacity: 0;
+  }
+
+  .input:focus + .mark {
+    background: #dddddd !important;
+    border: solid 1px $blue;
+  }
+
+  .input:checked + .mark {
+    border: solid 1px $blue;
+    background: #ffffff;
+  }
+
+  .input:checked + .mark::before {
     content: '';
     display: block;
     position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    height: 70%;
+    border-radius: 50%;
+    background-color: $blue;
+  }
+
+  .mark {
+    position: relative;
+    top: 0;
+    left: 0;
+    display: block;
     width: 12px;
     height: 12px;
-    border-radius: 99px;
-    border: 1px solid #008eff;
-  }
-
-  &:checked ~ .mark {
-    // content: "";
-    // display: block;
-    // position: absolute;
-    // top: 3px;
-    // left: 3px;
-    width: 11px;
-    height: 11px;
-    background: #d01137;
+    border: solid 1px #93cfff;
+    background: #ffffff;
     border-radius: 50%;
-    // opacity: 0;
   }
 
-  > .input {
-    // display: none;
-    &:checked {
-      display: none;
-    }
+  .text {
+    margin-left: 12px;
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
   }
 }
 </style>

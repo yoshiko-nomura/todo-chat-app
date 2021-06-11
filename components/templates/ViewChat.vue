@@ -1,9 +1,26 @@
 <template>
-  <div class="view view-chat"></div>
+  <div class="view view-chat">
+    <div class="top">
+      <p class="title">チャット</p>
+    </div>
+    <ListChat :image="image" :name="name" />
+    <FormChat />
+  </div>
 </template>
 
 <script>
-export default {}
+export default {
+  props: {
+    image: {
+      type: String,
+      default: '',
+    },
+    name: {
+      type: String,
+      default: '',
+    },
+  },
+}
 </script>
 
 <style lang="scss" scoped>

@@ -1,9 +1,24 @@
 <template>
-  <textarea class="form-item form-item-textarea"></textarea>
+  <textarea
+    v-bind="$attrs"
+    :class="{ small: itemStatus === 'small' }"
+    class="form-item form-item-textarea"
+    placeholder="メッセージ"
+    @input="$emit('input', $event.target.value)"
+  >
+  </textarea>
 </template>
 
 <script>
-export default {}
+export default {
+  props: {
+    itemStatus: {
+      type: String,
+      required: false,
+      default: '',
+    },
+  },
+}
 </script>
 
 <style lang="scss" scoped>

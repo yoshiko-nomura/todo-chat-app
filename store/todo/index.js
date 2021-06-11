@@ -3,49 +3,46 @@ export const state = () => ({
 })
 
 export const getters = {
-  todos: state => {
+  todos: (state) => {
     return state.todos
   },
 }
 
 export const actions = {
-  submitTodo ({ dispatch }, todo) {
-    this.$fire.firestore.collection('todo').add({})
-      .then((res) => {
-        console.log(res)
-        this.$fire.firestore.collection('todo').doc(res.id)
-          .set({
-            todo: todo,
-            id: res.id,
-          })
-          .then(() => {
-            dispatch('getTodos')
-          })
+  async submitTask({ dispatch }, { task, uid }) {
+    try {
+      await this.$fire.firestore.collection('task').doc().set({
+        task,
+        uid,
       })
+      dispatch('getData')
+    } catch (error) {
+      console.log(error) //eslint-disable-line
+    }
   },
-  getTodos({ commit }) {
-    this.$fire.firestore.collection('todo').get()
-      .then(function(querySnapshot) {
-        const todos = []
-        querySnapshot.forEach(function(doc) {
-          // doc.data() is never undefined for query doc snapshots
-          console.log(doc.id, " => ", doc.data());
-          todos.push(doc.data())
-        })
-        commit('getTodos', todos)
+  async getData({ commit }) {
+    try {
+      const user = this.$fire.auth.currentUser
+      console.log(user.uid)
+      const querySnapshot = await this.$fire.firestore
+        .collection('task')
+        .where('uid', '==', user.uid)
+        .get()
+      const todos = []
+      querySnapshot.forEach((doc) => {
+        const data = doc.data()
+        console.log(data)
+        todos.push(data)
       })
-  },
-  deleteTodo({ dispatch }, id) {
-    this.$fire.firestore.collection('todo').doc(id).delete()
-    dispatch('getTodos')
+      commit('setData', todos)
+    } catch (error) {
+      console.log(error)
+    }
   },
 }
 
 export const mutations = {
-  getTodos (state, todos) {
-    state.todos = todos
+  setData(state, data) {
+    state.todos = data
   },
-  // deleteTodo (state, index) {
-  //   state.todos.splice(index, 1)
-  // },
 }

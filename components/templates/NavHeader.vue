@@ -1,9 +1,18 @@
 <template>
-  <div class="nav nav-header"></div>
+  <div class="nav nav-header">
+    <h1 class="title">WeAre</h1>
+    <IconUser :image="image" />
+  </div>
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      image: this.$store.getters.user.photoURL,
+    }
+  },
+}
 </script>
 
 <style lang="scss" scoped>

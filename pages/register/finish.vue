@@ -6,7 +6,7 @@
         <p class="main">There is always light behind the clouds.</p>
         <p class="sub">from Louisa May Alcott</p>
       </div>
-      <FormItemButton label="始める" @click="$router.push('/')" />
+      <FormItemButton label="始める" type="button" @click="$router.push('/')" />
     </div>
   </div>
 </template>

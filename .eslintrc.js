@@ -14,7 +14,5 @@ module.exports = {
   ],
   plugins: [],
   // add your custom rules here
-  rules: {
-    "newIsCap": 0,
-  },
+  rules: {},
 }

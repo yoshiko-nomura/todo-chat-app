@@ -1,24 +1,40 @@
 <template>
-  <li class="list-item list-item-task"></li>
+  <li class="list-item list-item-task">
+    <FormItemInputCheck v-model="isChecked" />
+    <p class="text">{{ todos.task }}</p>
+  </li>
 </template>
 
 <script>
-export default {}
+export default {
+  props: {
+    todos: {
+      type: Object,
+      // default: {},
+    },
+  },
+  data() {
+    return {
+      isChecked: '',
+    }
+  },
+}
 </script>
 
 <style lang="scss" scoped>
 .list-item-task {
-  padding: 6px 12px 6px 32px;
+  padding: 6px;
+  display: flex;
 
   > .text {
-    padding-top: 6px;
+    // padding: 6px 0;
     display: inline-block;
     position: relative;
 
     &:before {
       content: '';
       position: absolute;
-      top: 0;
+      top: -5px;
       display: inline-block;
       width: 676px;
       height: 1px;
