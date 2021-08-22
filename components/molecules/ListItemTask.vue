@@ -10,7 +10,7 @@ export default {
   props: {
     todos: {
       type: Object,
-      // default: {},
+      default: () => {},
     },
   },
   data() {
@@ -26,7 +26,7 @@ export default {
   padding: 6px;
   display: flex;
 
-  > .text {
+  > .text p {
     // padding: 6px 0;
     display: inline-block;
     position: relative;
@@ -39,6 +39,9 @@ export default {
       width: 676px;
       height: 1px;
       background-color: #bbbbbb;
+    }
+    &:first-child:before {
+      content: none;
     }
   }
 }

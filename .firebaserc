@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "nuxt-app-d62de"
+  },
+  "targets": {
+    "nuxt-app-d62de": {
+      "hosting": {
+        "nuxt-app-d62de": [
+          "nuxt-app-d62de"
+        ]
+      }
+    }
   }
 }

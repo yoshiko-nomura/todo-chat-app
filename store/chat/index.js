@@ -9,23 +9,29 @@ export const getters = {
 }
 
 export const actions = {
-  async submitChat(_, payload) {
+  async submitChat({ dispatch }, payload) {
     try {
-      await this.$fire.database.ref().push().set({
+      await this.$fire.database.ref('users/').push().set({
         text: payload.text,
         time: this.$fireModule.database.ServerValue.TIMESTAMP,
         uid: payload.uid,
       })
+      dispatch('getData')
     } catch (error) {
       console.log(error)//eslint-disable-line
     }
   },
   async getData({ commit }) {
     try {
-      await this.$fire.database.ref().on('value', (snapshot) => {
-        const data = snapshot.val()
-        commit('setData', data)
-      })
+      // const uid = this.$fire.auth.currentUser.uid
+      await this.$fire.database
+        .ref()
+        .child('users')
+        .once('value')
+        .then((data) => {
+          // console.log('取得のやつ' + data.val())
+          commit('setData', data.val())
+        })
     } catch (error) {
       console.log(error)//eslint-disable-line
     }
